@@ -1,0 +1,43 @@
+<View className="flex flex-row  gap-x-[17.5%]  items-center mt-[50%] mb-3 ">
+          <Text className="text-xl font tracking-tighter text-gray-600">
+            Trending Groups
+          </Text>
+          <Text className="text-blue-600 underline tracking-tighter">
+            Expoler Groups
+          </Text>
+        </View> 
+
+        <View className="flex flex-col mt-20">
+          <Text className="font-bold text-3xl tracking-tighter text-center ">Welcome to Gossip</Text>
+          <Text className="text-xm tracking-tighter text-center text-gray-600">Join your favourite community</Text>
+        </View>
+
+            name="Notification"
+options={{
+              headerTitle: (props) => <LogoTitle/>,
+              headerRight: () => (
+                <CreateGroupButton />
+              ),
+
+            }}
+
+
+// Edit profile page
+ <Text className={InputStyle.inputHeader}>Fukc</Text>
+        <Controller
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            
+            <TextInput
+              // style={styles.input}
+              className={InputStyle.input}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+            />
+          )}
+          name="firstName"
+        />
