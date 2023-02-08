@@ -26,12 +26,19 @@ function HomeStackScreen(){
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen name="HomeScreen" component={Home} options={{headerShown: false, title:"Home"}}/>
+
+      <HomeStack.Group screenOptions={{ presentation: 'modal' }}>
       <HomeStack.Screen
       name="CreateGroup" 
       options={{
         title: "Create Group",
+        cardStyle: {
+          backgroundColor: 'white'
+        }
       }} 
       component={CreateGroup} />
+      </HomeStack.Group>
+      
     </HomeStack.Navigator>
   )
 }
@@ -41,7 +48,7 @@ function ProfileStackScreen(){
   return (
     <ProfileStack.Navigator>
       <ProfileStack.Screen name="ProfileScreen" options={{headerShown: false,title: "Profile"}} component={Profile}/>
-      <ProfileStack.Screen name="EditProfile" options={{title: "Edit profile",}} component={EditProfile}/>
+      <ProfileStack.Screen name="EditProfile" options={{title: "Edit Profile",}} component={EditProfile}/>
       <ProfileStack.Screen name="Settings" component={Settings}/>
     </ProfileStack.Navigator>
   )
