@@ -4,7 +4,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 const ChatCard = () => {
   return (
-        <View className="flex flex-row  gap-x-11  w-screen  py-2 pt-4 border-gray-100  border-b justify-center">
+        <View className="flex-row  gap-x-11  w-screen  py-2 pt-4 border-gray-100  border-b justify-center">
       <Image
         className="w-14 rounded-3xl bg-gray-50  aspect-square "
         source={{
@@ -12,7 +12,7 @@ const ChatCard = () => {
         }}
       />
       <View className="flext flex-col ">
-        <Text className=" text-lg font-medium">
+        <Text className=" text-lg ">
             Gossip Alert
         </Text>
         <View className="flex flex-row">
