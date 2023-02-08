@@ -10,7 +10,7 @@ const Home = () => {
   const [totalSubscription, setTotalSubscription] = useState(1)
   
   return (
-    <View className="items-center w-fit bg-white  h-screen">
+    <View className="items-center  bg-white  h-screen">
       
       {totalSubscription===0?(<NewUserPage/>):(<UserWithSubscriptions/>)}
     </View>
