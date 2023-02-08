@@ -3,17 +3,6 @@ import React, { useState } from 'react'
 
 import { useForm, Controller } from "react-hook-form";
 
-const GROUP_NAME_MIN_CHAR = 5
-const GROUP_NAME_MAX_CHAR = 20
-
-const ErrorView = () => {
-  return (
-    <View>
-      <Text className="py-0.5  text-gray-500 w-64 tracking tracking-tighter text-xs">Group name should be more than 5 & less than 20 charactor in length.</Text>
-      <Text className="py-0.5  text-red-500 text-center">This is required.</Text>
-    </View>
-  )
-}
 
 const CreateGroup = () => {
   const { control, handleSubmit, formState: { errors } } = useForm({
@@ -47,7 +36,9 @@ const CreateGroup = () => {
         )}
         name="groupName"
       />
-      {errors.groupName && <ErrorView/>}
+      {errors.groupName && 
+      <Text className="py-0.5  text-red-500 w-64 tracking tracking-tighter text-xs">group name should be more than 5 and less than 20 charactor in length.</Text>
+      }
 
       <View className="my-3">
         <Button 
