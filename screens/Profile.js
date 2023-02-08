@@ -5,6 +5,8 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import { useNavigation } from '@react-navigation/native';
 
+import GoToGroupSettings from "../components/group/GoToGroupSettings";
+import { ScrollView } from "react-native-gesture-handler";
 
 const Profile = () => {
   const navigation = useNavigation()
@@ -19,6 +21,7 @@ const Profile = () => {
   const twitterIcon = "twitter"
 
   return (
+    <ScrollView bounces={false} showsVerticalScrollIndicator={false} >
     <View className="h-screen bg-white ">
         <Image
           className="w-screen h-36 bg-gray-50 py-2 aspect-auto"
@@ -29,6 +32,7 @@ const Profile = () => {
 
       <View className="px-5 w-fit items-left">
         <Image
+        style={{borderWidth: 3, borderColor: "white"}}
         className="w-24 rounded-full bg-gray-50 bottom-10  border-4 border-white  aspect-square "
         source={{
           uri: "https://source.unsplash.com/150x150/?portrait?3",
@@ -59,10 +63,15 @@ const Profile = () => {
       </View>  
       <Text className="py-3 text-gray-800">Joind 11 July, 2023</Text>
       </View>
+
+      <View>
+        <GoToGroupSettings/>
+      </View>
       </View>
 
 
     </View>
+    </ScrollView>
   );
 };
 
