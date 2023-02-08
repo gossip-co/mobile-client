@@ -1,5 +1,5 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
+import { View, Text, Image, Modal, Button } from "react-native";
+import React, {useState} from "react";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
@@ -60,6 +60,8 @@ const Profile = () => {
       <Text className="py-3 text-gray-800">Joind 11 July, 2023</Text>
       </View>
       </View>
+
+
     </View>
   );
 };
