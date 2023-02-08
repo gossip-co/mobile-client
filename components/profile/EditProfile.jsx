@@ -1,9 +1,8 @@
-import { View, Text, TextInput, Button, ScrollView } from "react-native";
+import { View, Text, Image,  TextInput, Button, ScrollView, Alert } from "react-native";
 import React, { useState } from "react";
 
 import { useForm, Controller } from "react-hook-form";
 
-import { Tile } from "@rneui/themed";
 
 const InputStyle = {
   inputHeader: " text-lg tracking-tighter",
@@ -41,49 +40,29 @@ const EditProfile = ({ profile }) => {
   });
   const onSubmit = (data) => console.log(data);
   return (
-    <ScrollView className=" bg-white" bounces={false}>
+    <ScrollView className=" bg-white" bounces={false} showsVerticalScrollIndicator={false}>
       <View className="w-screen h-36 bg-gray-50">
-        <Tile
-          imageSrc={{
+      <Image
+        onPress={()=>{console.log("Profile timeline pic changed option...")}}
+          className="w-screen h-36 bg-gray-50 py-2 aspect-auto"
+          source={{
             uri: "https://source.unsplash.com/1500x500/?portrait?3",
           }}
-          height={185}
-          icon={{
-            name: "camera-outline",
-            type: "ionicon",
-            size: 50,
-            color: "#f9fafb",
-          }}
-          onPress={() => {
-            console.log("image button pressed");
-          }}
         />
+
+      <View className="px-5 w-fit items-left"  >
+        <Image
+        style={{borderWidth: 3, borderColor: "white"}}
+        onPress={()=>{console.log("Profile pic changed option...")}}
+        className="w-24 rounded-full bg-gray-50 bottom-10  border-4 border-white  aspect-square "
+        source={{
+          uri: "https://source.unsplash.com/150x150/?portrait?3",
+        }}
+      />
       </View>
-      <View className="w-24 h-24 px-5 bottom-8 ">
-        <Tile
-          imageSrc={{
-            uri: "https://source.unsplash.com/150x150/?portrait?3",
-          }}
-          icon={{
-            name: "camera-outline",
-            type: "ionicon",
-            size: 30,
-            color: "#f9fafb",
-          }}
-          width={90}
-          height={130}
-          imageContainerStyle={{
-            borderRadius: 50,
-            borderWidth: 4,
-            borderColor: "white",
-          }}
-          onPress={() => {
-            console.log("image button pressed");
-          }}
-        />
       </View>
 
-      <View className="px-5">
+      <View className="px-5 mt-16">
         <View>
           {inputs.map((input, key) => (
             <View className="my-3" key={key}>
