@@ -20,6 +20,7 @@ import SearchInput from "./components/search/SearchInput";
 
 import EditProfile from "./components/profile/EditProfile";
 import ProfileNavigation from "./components/profile/ProfileNavigation";
+import GroupSettings from "./components/group/GroupSettings";
 
 const HomeStack = createStackNavigator()
 function HomeStackScreen(){
@@ -50,6 +51,8 @@ function ProfileStackScreen(){
       <ProfileStack.Screen name="ProfileScreen" options={{headerShown: false,title: "Profile"}} component={Profile}/>
       <ProfileStack.Screen name="EditProfile" options={{title: "Edit Profile",}} component={EditProfile}/>
       <ProfileStack.Screen name="Settings" component={Settings}/>
+      {/* user group name will show in the header */}
+      <ProfileStack.Screen name="GroupSettings" component={GroupSettings} options={{title: "Gossip Official"}}/> 
     </ProfileStack.Navigator>
   )
 }
@@ -146,7 +149,7 @@ export default function App() {
           options={({ route }) => ({
             headerShown: ((route) => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-              if (routeName === 'EditProfile' || routeName=== 'Settings') {
+              if (routeName === 'EditProfile' || routeName === 'Settings' || routeName === 'GroupSettings') {
                 return false
               }
               return true
@@ -156,7 +159,7 @@ export default function App() {
                 ),
             tabBarStyle: ((route)=> {
               const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-              if (routeName === "EditProfile" || routeName === "Settings"){
+              if (routeName === "EditProfile" || routeName === "Settings" || routeName === "GroupSettings"){
                 return {display: 'none'}
               }
               return {display: 'flex'}
