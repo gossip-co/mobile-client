@@ -21,11 +21,9 @@ const UserWithSubscriptions = () => {
         <ChatCard/>
         <ChatCard/>
         <ChatCard/>
-        <View className="my-28">
-        {/* <Text className="text-blue-600 shadow-3xl w-32 font  bg-gray-100  text-center tracking-tighter px-2 py-3 rounded-2xl">Trending Groups</Text> */}
-        </View>
   
       </ScrollView>
+
 
   )
 }

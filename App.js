@@ -1,7 +1,9 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from "@react-navigation/stack";
 import { getFocusedRouteNameFromRoute} from "@react-navigation/native";
 
@@ -11,24 +13,49 @@ import Home from "./screens/Home";
 import Search from "./screens/Search";
 import Notification from "./screens/Notification";
 import Profile from "./screens/Profile";
-import Settings from "./screens/Settings";
 
 import LogoTitle from "./components/homepage/LogoTitle";
-import CreateGroupButton from "./components/homepage/CreateGroupButton";
+import HomeNavigation from "./components/homepage/HomeNavigation";
 import CreateGroup from "./components/homepage/CreateGroup";
 import SearchInput from "./components/search/SearchInput";
+import ShareFeedback from "./components/homepage/ShareFeedback";
+import UpComingReleases from "./components/homepage/UpComingReleases";
 
 import EditProfile from "./components/profile/EditProfile";
 import ProfileNavigation from "./components/profile/ProfileNavigation";
 import GroupSettings from "./components/group/GroupSettings";
+import LaunchGroup from "./components/group/LaunchGroup";
+
+import Settings from "./screens/Settings";
+import PaymentMethods from "./components/settings/PaymentMethods";
+import GetPayouts from "./components/settings/GetPayouts";
+
+import GroupDetail from "./components/group/GroupDetail";
+import AboutGroupDetailedSection from "./components/group/AboutGroupDetailedSection"; //Change the component name this is horrable can't understand this shit
+
+import ChatScreen from "./components/group-chat/ChatScreen";
+import ChatScreenWithDrawer from './components/group-chat/ChatScreenWithDrawer';
+import UserProfile from "./components/profile/UserProfile";
+
+// const Drawer = createDrawerNavigator()
+// function ChatScreenWithDrawer(){
+//   return (
+//     <Drawer.Navigator>
+//       <Drawer.Screen name="ChatScreen" component={ChatScreen} options={{title:"Gossip Official"}}/>
+//     </Drawer.Navigator>
+//   )
+// }
 
 const HomeStack = createStackNavigator()
 function HomeStackScreen(){
   return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen name="HomeScreen" component={Home} options={{headerShown: false, title:"Home"}}/>
+    <HomeStack.Navigator screenOptions={{animationEnabled: false}}>
+      <HomeStack.Group>
+      <HomeStack.Screen name="HomeScreen" component={Home} options={{headerShown: false, title:"Home"}} />
+      <HomeStack.Screen name="ChatScreen" component={ChatScreen} options={{title:"Gossip Official"}}/>
+      </HomeStack.Group>
 
-      <HomeStack.Group screenOptions={{ presentation: 'modal' }}>
+      <HomeStack.Group screenOptions={{ presentation: 'modal', animationEnabled: true }}>
       <HomeStack.Screen
       name="CreateGroup" 
       options={{
@@ -38,6 +65,30 @@ function HomeStackScreen(){
         }
       }} 
       component={CreateGroup} />
+      <HomeStack.Screen name="UserProfile" component={UserProfile}
+      options={{
+        title: null,
+        cardStyle : {
+          backgroundColor: 'white'
+        }
+      }}
+      />
+      <HomeStack.Screen name="ShareFeedback" component={ShareFeedback}
+      options={{
+        title: "Share Feedback",
+        cardStyle : {
+          backgroundColor: 'white'
+        }
+      }}
+      />
+      <HomeStack.Screen name="UpComingReleases" component={UpComingReleases}
+      options={{
+        title: "Upcoming Releases",
+        cardStyle : {
+          backgroundColor: 'white'
+        }
+      }}
+      />
       </HomeStack.Group>
       
     </HomeStack.Navigator>
@@ -47,13 +98,53 @@ function HomeStackScreen(){
 const ProfileStack = createStackNavigator()
 function ProfileStackScreen(){
   return (
-    <ProfileStack.Navigator>
+    <ProfileStack.Navigator screenOptions={{animationEnabled: false}}>
       <ProfileStack.Screen name="ProfileScreen" options={{headerShown: false,title: "Profile"}} component={Profile}/>
       <ProfileStack.Screen name="EditProfile" options={{title: "Edit Profile",}} component={EditProfile}/>
       <ProfileStack.Screen name="Settings" component={Settings}/>
+      <ProfileStack.Screen name="PaymentMethods" component={PaymentMethods} options={{title: "Payment Method"}}/>
+      <ProfileStack.Screen name="GetPayouts" component={GetPayouts} options={{title: "Payouts"}}/>
       {/* user group name will show in the header */}
-      <ProfileStack.Screen name="GroupSettings" component={GroupSettings} options={{title: "Gossip Official"}}/> 
+      <ProfileStack.Screen 
+      name="GroupSettings" component={GroupSettings} 
+      options={{
+        title: "Gossip Official",
+        headerRight: ()=> <LaunchGroup/>
+      }}/> 
+
     </ProfileStack.Navigator>
+  )
+}
+
+const SearchStack = createStackNavigator()
+function SearchStackScreen(){
+  return (
+    <SearchStack.Navigator screenOptions={{animationEnabled: false}}>
+      <SearchStack.Group>
+      <SearchStack.Screen 
+      name="SearchScreen" 
+      options={{
+        title: "Search",
+            headerTitle: (props)=>null,
+            headerLeft: () => <SearchInput/>,
+          }}
+      component={Search}
+      />
+      <SearchStack.Screen
+      name="GroupDetail" //Group Name
+      component={GroupDetail}
+      options={{
+        title: "Gossip Official"
+      }}
+      />
+      </SearchStack.Group>
+
+      
+      <SearchStack.Group screenOptions={{ presentation: 'modal' }}>
+        <SearchStack.Screen name="AboutGroup" options={{title: "About Gossip Official"}} component={AboutGroupDetailedSection}/>
+      </SearchStack.Group>
+
+    </SearchStack.Navigator>
   )
 }
 
@@ -109,19 +200,31 @@ export default function App() {
             options={({ route }) => ({
               headerShown: ((route) => {
                 const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-                if (routeName === 'CreateGroup') {
+                if (
+                routeName==='CreateGroup' || 
+                routeName==="ChatScreen" || 
+                routeName==="UserProfile" || 
+                routeName==="ShareFeedback" ||
+                routeName==="UpComingReleases"
+                ) {
                   return false
                 }
                 return true
               })(route),
               headerTitle: (props) => null,
               headerRight: () => (
-                    <CreateGroupButton />
+                    <HomeNavigation/>
                   ),
               headerLeft: (props) => <LogoTitle/>,
               tabBarStyle: ((route)=> {
                 const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-                if (routeName === "CreateGroup"){
+                if (
+                routeName==="CreateGroup" || 
+                routeName==="ChatScreen" || 
+                routeName==="UserProfile" || 
+                routeName==="ShareFeedback" ||
+                routeName==="UpComingReleases"
+                ){
                   return {display: 'none'}
                 }
                 return {display: 'flex'}
@@ -130,11 +233,17 @@ export default function App() {
           />
           <Tab.Screen 
            name="Search"
-           component={Search}
-           options={{
-            headerTitle: (props)=>null,
-            headerLeft: () => <SearchInput/>,
-           }}
+           options={({route})=> ({
+            headerShown: false,
+            tabBarStyle: ((route)=> {
+              const routeName = getFocusedRouteNameFromRoute(route) ?? ""
+              if (routeName === "GroupDetail"){
+                return {display: 'none'}
+              }
+              return {display: 'flex'}
+            })(route)
+           })}
+           component={SearchStackScreen}
           />
           <Tab.Screen
             name="Notifications"
@@ -149,7 +258,7 @@ export default function App() {
           options={({ route }) => ({
             headerShown: ((route) => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-              if (routeName === 'EditProfile' || routeName === 'Settings' || routeName === 'GroupSettings') {
+              if (routeName === 'EditProfile' || routeName === 'Settings' || routeName === 'GroupSettings' || routeName === "GetPayouts"|| routeName === "PaymentMethods") {
                 return false
               }
               return true
@@ -159,13 +268,14 @@ export default function App() {
                 ),
             tabBarStyle: ((route)=> {
               const routeName = getFocusedRouteNameFromRoute(route) ?? ""
-              if (routeName === "EditProfile" || routeName === "Settings" || routeName === "GroupSettings"){
+              if (routeName === "EditProfile" || routeName === "Settings" || routeName === "GroupSettings" || routeName === "GetPayouts" || routeName === "PaymentMethods"){
                 return {display: 'none'}
               }
               return {display: 'flex'}
             })(route)
           })}
            />
+          
         </Tab.Group>
 
         {/* <Tab.Group >

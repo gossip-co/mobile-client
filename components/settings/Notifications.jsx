@@ -10,7 +10,7 @@ const Notifications = () => {
 
 
   return (
-    <View>
+    <View className="w-screen px-3">
        <View className="flex-row px-2  w-full py-3 items-center bg-gray-100 rounded-t-xl  border-b border-gray-300">
         <Text className=" text-lg tracking-tighter grow">
           Chat Notifications

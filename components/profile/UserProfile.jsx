@@ -1,14 +1,14 @@
-import { View, Text, Image, Modal, Button } from "react-native";
+import { View, Text, Image } from "react-native";
 import React, {useState} from "react";
 
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import { useNavigation } from '@react-navigation/native';
 
-import GoToGroupSettings from "../components/group/GoToGroupSettings";
 import { ScrollView } from "react-native-gesture-handler";
+import GroupSubscribedByUserPreviewCard from "../group/GroupSubscribedByUserPreviewCard";
 
-const Profile = () => {
+const UserProfile = () => {
   const navigation = useNavigation()
   const timeLineImg = true;
   const profilePic = true;
@@ -21,8 +21,8 @@ const Profile = () => {
   const twitterIcon = "twitter"
 
   return (
-    <View className="bg-white" style={{flex: 1}}>
-<ScrollView bounces={false} showsVerticalScrollIndicator={false} >
+    <View style={{flex: 1}}>
+      <ScrollView bounces={false} showsVerticalScrollIndicator={false} >
     <View className=" bg-white ">
         <Image
           className="w-screen h-36 bg-gray-50 py-2 aspect-auto"
@@ -66,11 +66,21 @@ const Profile = () => {
       </View>
 
       <View>
-        <GoToGroupSettings/>
-      </View>
+      <Text className="text-base tracking-tighter">Subscribed Group</Text>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+        <GroupSubscribedByUserPreviewCard/>
+      </ScrollView>
       </View>
 
 
+    </View>
     </View>
     </ScrollView>
     </View>
@@ -78,4 +88,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default UserProfile;

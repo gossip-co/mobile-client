@@ -3,7 +3,7 @@ import React from 'react'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import Notifications from '../components/settings/Notifications'
-import PaymentMethods from '../components/settings/PaymentMethods'
+import GoPaymentMethods from '../components/settings/GoPaymentMethods'
 import ExtraOptions from '../components/settings/ExtraOptions'
 import Logout from '../components/settings/Logout'
 import Account from '../components/settings/Account'
@@ -15,13 +15,16 @@ import Account from '../components/settings/Account'
 const Settings = () => {
   const isUserHasGroup = true
   return (
-<ScrollView  bounces={false} showsVerticalScrollIndicator={false} >
+    <View style={{flex:1}}>
+      <ScrollView  bounces={false} showsVerticalScrollIndicator={false} >
     <View className="h-screen bg-white items-center pt-0.5 px-3" >
 
+        <View>
         <Notifications/>
+        </View>
       
       <View className="my-5">
-      <PaymentMethods/>
+      <GoPaymentMethods/>
       </View>
 
       <View>
@@ -39,6 +42,8 @@ const Settings = () => {
       
     </View>
     </ScrollView>
+    </View>
+
 
   )
 }

@@ -5,7 +5,7 @@ import NotificationCard from '../components/notification/NotificationCard'
 
 const Notification = () => {
   return (
-    <View className=" bg-white items-center  ">
+    <View className=" bg-white  " style={{flex:1}}>
       <ScrollView bounces={false}>
         <NotificationCard/>
         <NotificationCard/>
@@ -29,9 +29,6 @@ const Notification = () => {
         <NotificationCard/>
         <NotificationCard/>
         <NotificationCard/>
-        <NotificationCard/>
-
-        
       </ScrollView>
     </View>
   )

@@ -1,4 +1,15 @@
-import { View, Text, Image,  TextInput, Button, ScrollView, Alert } from "react-native";
+import {
+  View, 
+  Text, 
+  Image,  
+  TextInput, 
+  Button, 
+  ScrollView, 
+  Alert,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard
+} from "react-native";
 import React, { useState } from "react";
 
 import { useForm, Controller } from "react-hook-form";
@@ -10,6 +21,7 @@ const InputStyle = {
     " text-sm text-gray-800 tracking-tighter border-b-2 border-gray-200 pt-1 py-1",
   inputError: "text-red-600 px-1",
 };
+
 const EditProfile = ({ profile }) => {
   const [inputs, setInputs] = useState([
     { name: "name", title: "Name" },
@@ -40,6 +52,10 @@ const EditProfile = ({ profile }) => {
   });
   const onSubmit = (data) => console.log(data);
   return (
+    <KeyboardAvoidingView
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={{ flex: 1}}
+    >
     <ScrollView className=" bg-white" bounces={false} showsVerticalScrollIndicator={false}>
       <View className="w-screen h-36 bg-gray-50">
       <Image
@@ -73,6 +89,7 @@ const EditProfile = ({ profile }) => {
                   required: true,
                 }}
                 render={({ field: { onChange, onBlur, value } }) => (
+                  <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                   <TextInput
                     // style={styles.input}
                     className={InputStyle.input}
@@ -82,6 +99,7 @@ const EditProfile = ({ profile }) => {
                     multiline={input.multiline && true}
                     // editable={false}
                   />
+                  </TouchableWithoutFeedback>
                 )}
                 name={input.name}
               />
@@ -102,6 +120,7 @@ const EditProfile = ({ profile }) => {
         </View>
       </View>
     </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

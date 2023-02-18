@@ -3,20 +3,19 @@ import React from 'react'
 import Feather from "react-native-vector-icons/Feather";
 import { useNavigation } from '@react-navigation/native';
 
-const CreateGroupButton = () => {
-  const createGroupIconName = "plus"
+const ShareFeedbackBtn = () => {
+  const shareFeedbackIconName = "share"
   const navigation = useNavigation()
 
   return (
     <Pressable
-    className="border-2 rounded-lg"
-    onPress={() => navigation.navigate('Home', { screen: 'CreateGroup' })}
+    onPress={() => navigation.navigate('Home', { screen: 'ShareFeedback' })}
     >
       <Feather
-      name={createGroupIconName} size={20} color="black"/>
+      name={shareFeedbackIconName} size={25} color="black"/>
       
     </Pressable>
   )
 }
 
-export default CreateGroupButton
+export default ShareFeedbackBtn
