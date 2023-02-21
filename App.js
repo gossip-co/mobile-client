@@ -1,9 +1,9 @@
 import 'react-native-gesture-handler';
+import { useState } from 'react';
 import { StatusBar } from "expo-status-bar";
 import { useFonts } from 'expo-font';
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from "@react-navigation/stack";
 import { getFocusedRouteNameFromRoute} from "@react-navigation/native";
 
@@ -34,17 +34,12 @@ import GroupDetail from "./components/group/GroupDetail";
 import AboutGroupDetailedSection from "./components/group/AboutGroupDetailedSection"; //Change the component name this is horrable can't understand this shit
 
 import ChatScreen from "./components/group-chat/ChatScreen";
-import ChatScreenWithDrawer from './components/group-chat/ChatScreenWithDrawer';
 import UserProfile from "./components/profile/UserProfile";
 
-// const Drawer = createDrawerNavigator()
-// function ChatScreenWithDrawer(){
-//   return (
-//     <Drawer.Navigator>
-//       <Drawer.Screen name="ChatScreen" component={ChatScreen} options={{title:"Gossip Official"}}/>
-//     </Drawer.Navigator>
-//   )
-// }
+import OnBoardingScreen from './screens/OnBoardingScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegistrationScreen from './screens/RegistrationScreen';
+
 
 const HomeStack = createStackNavigator()
 function HomeStackScreen(){
@@ -149,7 +144,9 @@ function SearchStackScreen(){
 }
 
 const Tab = createBottomTabNavigator();
+const AuthStack = createStackNavigator()
 export default function App() {
+  const [isSignedIn, setIsSignedIn] = useState(true)
   const [fontsLoaded] = useFonts({
     'Hind-Light': require('./assets/fonts/Hind-Light.ttf'),
     'Hind-Bold': require('./assets/fonts/Hind-Bold.ttf'),
@@ -164,7 +161,8 @@ export default function App() {
 
   return (
     <NavigationContainer >
-      <Tab.Navigator
+      {isSignedIn ? (
+        <Tab.Navigator
         screenOptions={({ route }) => ({
           cardStyle: { backgroundColor: "white" },
           tabBarHideOnKeyboard: true,
@@ -282,6 +280,15 @@ export default function App() {
           <Tab.Screen name="Trending" component={TrendingGroups}/>
         </Tab.Group> */}
       </Tab.Navigator>
+      ) : 
+      (
+        <AuthStack.Navigator>
+          <AuthStack.Screen name="OnBoardingScreen" component={OnBoardingScreen} options={{title: null, headerShown: false}}/>
+          <AuthStack.Screen name="LoginScreen" component={LoginScreen} options={{title: "Log In"}}/>
+          <AuthStack.Screen name="RegistrationScreen" component={RegistrationScreen} options={{title: "Registration"}}/>
+        </AuthStack.Navigator>
+      )}
+      
       <StatusBar backgroundColor="#ffff" />
     </NavigationContainer>
   );
