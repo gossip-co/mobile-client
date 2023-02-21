@@ -2,7 +2,6 @@ import { View, Text, ScrollView, Button } from 'react-native'
 import React from 'react'
 
 import ChatCard from './ChatCard'
-import NewUserPage from './NewUserPage'
 
 const UserWithSubscriptions = () => {
   return (

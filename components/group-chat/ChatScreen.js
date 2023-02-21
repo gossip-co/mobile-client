@@ -14,7 +14,7 @@ const ChatScreen = ({}) => {
 
   // navigation.setOptions({title: "Hello World "})
   // const channelName = route.params?.channelName
-  // console.group("CHANNELS NAME>>>>", channelName)
+  // console.group("CHANNELS NAME>>>>", channelName)q
   return (
     <View style={{ flex: 1 }} className="bg-white  px-3 ">
 
